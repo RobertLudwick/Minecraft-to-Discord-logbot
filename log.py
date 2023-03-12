@@ -45,10 +45,11 @@ async def log_read():
     # picks relevant logs cleans and prints them
     out = ""
     for i in save:
-        if i[2] == ' [net.minecraft.server.MinecraftServer/':
-            if i[0] not in log:
-                await client.get_channel(messagelocation[0]).send(i[3].strip(":"))
-            out = out + i[0] + "\n"
+        if len(i) > 1:
+            if i[2] == ' [net.minecraft.server.MinecraftServer/':
+                if i[0] not in log:
+                    await client.get_channel(messagelocation[0]).send(i[3].strip(":"))
+        out = out + i[0] + "\n"
 
     #opens and writes to last file to track what has been sent
     logs = open("last.txt", "w")
